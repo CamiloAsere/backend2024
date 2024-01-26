@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalles del producto</title>
+  <link rel="stylesheet" href="/css/productDetails.css">
+  <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+  <header>
+    <div id="error-message" ></div>
+  </header>
+  <div class="product-details">
+    <img class="thumbnail" alt="<%= product.id + 'noImg' %>" src="<%= product.imageUrl %>" class="product-image" />
+    <br/>
+    <strong>Nombre:</strong> <%= product.name %> </br> 
+              <strong>Precio :</strong> <%= product.price %>  </br>
+              <strong>Disponibles:</strong> <%= product.quantity %> </br>
+              <label for="datareserva">Fecha de Reserva:</label> </br>
+              <input type="date" class="reserve-date" name="reserve-date" required/>
+              <details title="details">
+              <strong>description:</strong> <%= product.description %>
+              </details>
+              
+              <br/>
+              <button 
+              class="reserve-button" data-product-id="<%= product.id %>" type="button"
+              <%= product.quantity === 0 ? 'disabled' : '' %>
+              >Reservar</button>
+    <button onclick="window.history.back();">Atrás</button>
+  </div>
+  <script>
+    // Al hacer clic en un botón de reserva, obtén la fecha y hora local del usuario y realiza la reserva
+    document.querySelectorAll('.reserve-button').forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const productId = e.target.dataset.productId;
+        const dateInputs = document.querySelectorAll('.reserve-date');
+        const dateInput = dateInputs[index];
+        const selectedDate = new Date(dateInput.value); // Obtener la fecha seleccionada por el usuario
+        const offset = selectedDate.getTimezoneOffset(); // Obtener el desfase horario en minutos
+        const userLocalDate = new Date(selectedDate.getTime() + (offset * 60 * 1000)); // Ajustar la fecha a la zona horaria local
+        const isoDateString = userLocalDate.toISOString().split('T')[0]; // Obtener la fecha en formato ISO
+        // Comprueba si el usuario ha introducido una fecha
+        if (!isoDateString) {
+        alert('Por favor, introduce una fecha');
+         return;
+        }
+        // Llama a la función de reserva con el ID del producto y la fecha ajustada
+        reserveProduct(productId, isoDateString);
+      });
+    });
+    
+    </script>
+    
+   <script>
+</script>
+  <script  src="/js/animation.js"></script> 
+  <script type="module" src="/js/reserveProduct.js"></script> 
+</body>
+</html>

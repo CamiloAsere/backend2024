@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Administrar productos</title>
+  <link rel="stylesheet" href="/css/products.css">
+</head>
+<body class="container">
+  <div class="row">
+    <div class="left-column">
+      <h1>Administrar productos</h1>
+      <a href="/products">◀️ volver a productos</a>
+      <div id="error-message" ></div>
+      <ul class="list">
+        <% products.forEach(product => { %>
+          <li class="list-item">
+            <strong>Nombre del producto:</strong> <%= product.name %> <br>
+            <strong>Precio del producto:</strong> <%= product.price %> <br>
+            <strong>Cantidad del producto:</strong> <%= product.quantity %> <br>
+            <button onclick="editProduct('<%= product.id %>', '<%= product.name %>', '<%= product.price %>', '<%= product.quantity %>', '<%= product.description %>', '<%= product.imageUrl %>')">Editar</button>
+            <form action="/admin/deleteProduct/<%= product.id %>" method="POST">
+              <button id="button" type="submit">Eliminar</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+   
+  
+  </div>
+  <div class="right-column">
+    <form id="productForm" class="form" action="/admin/addProduct" method="POST">
+      <input id="productId" type="hidden" name="id">
+      <input id="productName" class="input" type="text" name="name" placeholder="Nombre del producto" required>
+      <input id="productPrice" class="input" type="number" name="price" placeholder="Precio del producto" required>
+      <input id="productQuantity" class="input" type="number" name="quantity" placeholder="Cantidad del producto" required>
+       <!-- ... tus otros campos de entrada ... -->
+       <input id="description" class="input" type="text" name="description" placeholder="Descripcion del paquete">
+      <input id="productImageUrl" class="input" type="text" name="imageUrl" placeholder="URL de la imagen del producto">
+      <button id="formButton" class="button" type="submit">Agregar producto</button>
+    </form>
+      
+</div>
+
+<script>
+  function editProduct(id, name, price, quantity, imageUrl, description) { // Agrega imageUrl aquí
+    document.getElementById('productForm').action = "/admin/updateProduct/" + id;
+    document.getElementById('productId').value = id;
+    document.getElementById('productName').value = name;
+    document.getElementById('productPrice').value = price;
+    document.getElementById('productQuantity').value = quantity;
+    document.getElementById('productDescription').value = description;
+    document.getElementById('productImageUrl').value = imageUrl; // Y aquí
+    document.getElementById('formButton').textContent = "Actualizar producto";
+  }
+  function resetForm() {
+    document.getElementById('productForm').action = "/admin/addProduct";
+    document.getElementById('productId').value = "";
+    document.getElementById('productName').value = "";
+    document.getElementById('productPrice').value = "";
+    document.getElementById('productQuantity').value = "";
+    document.getElementById('productDescription').value = "";
+    document.getElementById('productImageUrl').value = ""; // Y aquí
+    document.getElementById('formButton').textContent = "Agregar producto";
+  }
+</script>
+
+  <script type="module" ></script>
+</body>
+</html>

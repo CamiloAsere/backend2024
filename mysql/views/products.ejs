@@ -1,0 +1,99 @@
+ <!-- //products.ejs -->
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Productos</title>
+  <link rel="stylesheet" href="/css/products.css">
+  <link rel="stylesheet" href="/css/thumbnail.css">
+  <link rel="stylesheet" href="/css/button3.css">
+</head>
+<body >
+  <header class="center">
+    <div style="width: fit-content;">
+    <span style="--n:2">P</span>
+    <span style="--n:3">r</span>
+    <span style="--n:4">o</span>
+    <span style="--n:5">d</span>
+    <span style="--n:6">u</span>
+    <span style="--n:7">c</span>
+    <span style="--n:8">t</span>
+    <span style="--n:8">o</span>
+    <span style="--n:9">s</span>
+    </div>
+    <div></div>
+
+    <a style="color: bisque;" href="/admin">Administrar productos</a> <!-- Aquí está el enlace para agregar producto -->
+    <a style="color: bisque;" href="/admin/reservations">Gestionar reservaciones</a> <!-- Aquí está el enlace para agregar producto -->
+    <!-- views/navbar.ejs -->
+  <!-- Si el usuario está autenticado, mostrar el botón de logout -->
+  <% if (user) { %>
+    <form action="/logout" method="POST">
+      <button class="button3 button-login" type="submit">Logout</button>
+    </form>
+  <!-- Si no, mostrar el botón de login -->
+  <% } else { %>
+    <a href="/login">
+      <button class="button3 button-logout" type="submit">Login</button>
+    </a>
+  <% } %>
+  </header>
+  <div id="error-message" ></div>
+  <div class="container"> 
+    <% products.forEach((product, index) => { %>
+      <li class="list-item">
+        <strong>Nombre del producto:</strong> <%= product.name %> <br>
+        <strong>Precio del producto:</strong> <%= product.price %>
+        <strong>Disponibles:</strong> <%= product.quantity %>
+       
+        <label for="datareserva">Fecha de Reserva:</label>
+        <input type="date" class="reserve-date" name="reserve-date" required/>
+        <button onclick="window.location.href='/productDetails/<%= product.id %>'">Ver detalles</button>
+        <button class="reserve-button" data-product-id="<%= product.id %>" <%= product.quantity === 0 ? 'disabled' : '' %>>
+          Reservar
+        </button>
+      </li>
+    <% }); %>
+    
+    <script>
+    // Al hacer clic en un botón de reserva, obtén la fecha y hora local del usuario y realiza la reserva
+    document.querySelectorAll('.reserve-button').forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const productId = e.target.dataset.productId;
+        const dateInputs = document.querySelectorAll('.reserve-date');
+        const dateInput = dateInputs[index];
+        const selectedDate = new Date(dateInput.value); // Obtener la fecha seleccionada por el usuario
+        const offset = selectedDate.getTimezoneOffset(); // Obtener el desfase horario en minutos
+        const userLocalDate = new Date(selectedDate.getTime() + (offset * 60 * 1000)); // Ajustar la fecha a la zona horaria local
+        const isoDateString = userLocalDate.toISOString().split('T')[0]; // Obtener la fecha en formato ISO
+        // Comprueba si el usuario ha introducido una fecha
+        if (!isoDateString) {
+        alert('Por favor, introduce una fecha');
+         return;
+        }
+        // Llama a la función de reserva con el ID del producto y la fecha ajustada
+        reserveProduct(productId, isoDateString);
+      });
+    });
+    
+    </script>
+    
+   <script>
+</script>
+  <script  src="/js/animation.js"></script> 
+  <script type="module" src="/js/reserveProduct.js"></script> 
+ <!-- Vincular el archivo JavaScript -->
+<script src="/js/handleAuth.js"></script>
+<script>
+// Comprobar si el usuario ha iniciado sesión
+if (document.cookie.split(';').some((item) => item.trim().startsWith('token='))) {
+  // Si el usuario ha iniciado sesión, cambiar el texto del botón a "Cerrar sesión"
+  document.getElementById('authButton').innerText = 'Cerrar sesión';
+} else {
+  // Si el usuario no ha iniciado sesión, cambiar el texto del botón a "Iniciar sesión"
+  document.getElementById('authButton').innerText = 'Iniciar sesión';
+}
+</script>
+  </body>
+</html>
+

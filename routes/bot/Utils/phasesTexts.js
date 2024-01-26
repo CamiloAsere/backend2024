@@ -1,0 +1,3 @@
+export const DAY_PHASE_MESSAGE='Ha amanecido en el pueblo. El reloj marca 90 segundos para deliberar, acusar y defender'
+export const NIGHT_PHASE_MESSAGE='Al caer la noche, la fatiga se apodera de todos tras un día agotador. Pero para los jugadores nocturnos, la luna menguante anuncia su turno. Tienen 90 segundos para ejecutar sus acciones.Los lobos están eligiendo a su próxima víctima.';
+export const START_GAME_MESSAGE='Bienvenidos al juego de Hombre Lobo. La historia comienza en un pequeño pueblo donde los aldeanos viven en paz. Pero una noche, un grupo de lobos llega al pueblo y comienza a matar a los aldeanos. Los aldeanos deben descubrir quiénes son los lobos y matarlos antes de que sea demasiado tarde. ¿Están listos para jugar?'

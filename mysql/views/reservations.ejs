@@ -1,0 +1,47 @@
+ <!-- //reservations.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Administrar reservaciones</title>
+  <link rel="stylesheet" href="/css/products.css">
+</head>
+<body class="container">
+  <div class="row">
+    <div class="left-column">
+      <h1>Administrar reservaciones</h1>
+      <a href="/products">◀️ volver a productos</a>
+      <div id="error-message" ></div>
+      <ul class="list">
+        <% reservations.forEach(reservation => { %>
+          <li class="list-item  
+          [animation:linear_reveal_both]
+          [animation-range:entry_5%_cover_30%]
+          [animation-timeline:view()" className={`
+        `}>
+            <strong>ID de la reservación:</strong> <%= reservation.id %> <br>
+            <strong>ID del usuario:</strong> <%= reservation.UserId %> <br>
+            <strong>ID del producto:</strong> <%= reservation.ProductId %> <br>
+            <strong>Fecha de la reservación:</strong> <%= reservation.date %> <br>
+            <button onclick="editReservation('<%= reservation.id %>', '<%= reservation.UserId %>', '<%= reservation.ProductId %>', '<%= reservation.date %>')">Editar</button>
+            <form action="/admin/reservations/<%= reservation.id %>" method="POST">
+              <button id="button" type="submit">Eliminar</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+    <div class="right-column">
+      <form id="reservationForm" class="form" action="/admin/reservation" method="POST">
+        <input id="reservationUserId" class="input" type="number" name="userId" placeholder="ID del usuario" required>
+        <input id="reservationProductId" class="input" type="number" name="productId" placeholder="ID del producto" required>
+        <input id="reservationDate" class="input" type="date" name="date" placeholder="Fecha de la reservación" required>
+        <button id="formButton" class="button" type="submit">Agregar reservación</button>
+      </form>
+    </div>
+  </div>
+<script>
+</script>
+<script type="module" src="/js/reservations.js"></script>
+
+</body>
+</html>

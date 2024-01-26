@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LenteLibre</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/sayra.css">
+    <link rel="stylesheet" href="/css/button3.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+
+
+
+    <header class="hero">
+<!--Cambie aqui en la seccion agregue id inicio-->
+
+        <section class="nav" id="inicio">
+            <figure class="nav_logo">
+                <img src="assets/logo123.png" class="nav_logo" alt="logolentelibre" width="230px" height="200px">
+              </figure>
+              <div class="icono-menu">
+                <img src="assets/menu-regular-24.png" id="icono-menu" class="menu">
+            </div>  
+
+
+
+            <!-- Si el usuario está autenticado, mostrar el botón de logout -->
+  <% if (user) { %>
+    <form action="/logout" method="POST">
+      <button class="button3" type="submit">Logout</button>
+    </form>
+  <!-- Si no, mostrar el botón de login -->
+  <% } else { %>
+    <a href="/login">
+        <button class="button3 button-logout" type="submit">Login</button>
+      </a>
+  <% } %> 
+
+
+      <!--Cambie la clase div por nav y elimine ul, li para q se viera mejor-->
+      <nav class="cont-menu" id="menu">
+        <a href="#inicio" class="nav_link">Inicio</a>
+        <a href="#about container" class="nav_link">Sobre nosotros</a>
+        <a href="#gallery container" class="nav_link">Nuestro trabajo</a>
+        <a href="#contact" class="nav_link">Contacto</a></li> 
+        
+      </nav>
+    </section>
+      
+
+        <section class="hero__main container">
+            <div class="hero__texts">
+                <h1 class="hero__title">Estudio Fotográfico</h1>
+                <h2 class="hero__copy">Fotos digitales,libros,lienzos y más...</h2><br>
+                <a href="login.html" class="hero_btn">Reserva Ya!</a>
+            </div>
+        </section>
+        
+    </header>
+    
+    <main class="main">
+
+        <section class="about container" id="about container">
+            <div class="about__texts">
+                <h2 class="title">¿Quienes somos?</h2>
+                <p class="about__paragraph">Somos un equipo de profesionales expertos en producciones fotográficas creativas, cuyo único compromiso es lograr la total satisfacción de sus clientes mediante la oferta de un servicio competitivo y de acuerdo a sus necesidades.</p>
+                <p class="about__paragraph">Nuestro staff está debidamente capacitado para la realización de sesiones fotográficas profesionales de alta calidad, respaldados por una alta tecnología en fotografía digital e impresos, acorde a los más exigentes estándares del mercado actual.</p>
+                <p class="about__paragraph">Somos fotógrafos, estilistas, maquillistas y editores profesionales que se ajustan a las necesidades de cada cliente.</p>
+                <p class="about__paragraph">Lente Libre programado para inaugurarse en el año 2020, terminó inaugurándose en otoño del 2022 debido a la situación difícil que provocó el covid-19.</p>
+                <a href="https://wa.me/+5355724221?text=estoy%20interesad@%20en%20su%20trabajo%20de%20foto" class="about__cta">Contactanos</a>
+            </div>
+            <figure class="about__img">
+                <img src="assets/5.webp" class="about__picture">
+            </figure>
+            
+        </section>
+
+        <section class="portfolio " id="portfolio">
+            <div class="portfolio__container container">
+                <h2 class="title">Nuestros planes de trabajo</h2>
+            <!-- views/index.ejs by Camilo-->
+                <div class="portfolio__cards">
+                    <% products.forEach((product, index) => { %>
+                    <article class="portfolio__card">
+                        <img src="assets/1.jpg" class="portfolio__picture">
+
+                        <div class="portfolio__texts">
+                            <h3 class="portfolio__title"><%= product.name %> </h3>
+                            <ul class="portfolio__paragraph">
+                                <li class="price">$<%= product.price %></li>
+                                <li style="width: break-word;"><%= product.description %></li>
+                                <br>
+                                <br>
+                            </ul>
+                            <a href="/productDetails/<%= product.id %>" class="portfolio__cta">Entra ahora</a>
+                        </div>
+                    </article>
+
+                    
+                    <% }); %>
+                </div>
+            <!-- views/index.ejs by Camilo-->
+            </div>
+        </section>
+
+        <section class="copy">
+            <div class="copy__texts container">
+                <h2 class="title title--margin">Hacemos sueños en hechos.</h2>
+            </div>
+        </section>
+
+        <section class="gallery container" id="gallery container">
+            <h2 class="title">Nuestro trabajo</h2>
+
+            <div class="gallery__container">
+
+                <img src="assets/bebe.jpg" class="gallery__picture">
+
+                <img src="assets/embarazada.jpg" class="gallery__picture">
+
+                <img src="assets/Quince.jpg" class="gallery__picture">
+
+                <img src="assets/nina.jpg" class="gallery__picture">
+
+                <img src="assets/dos.jpg" class="gallery__picture">
+
+                <img src="assets/quince3.jpg" class="gallery__picture">
+
+            </div>
+        </section>
+
+        <section class="languages">
+            <div class="container">
+                <h2 class="title">Expertos en:</h2>
+<!--Se elimino una de las imagenes para q solo salgan dos-->
+                <div class="languages__container">
+                    <img src="assets/undraw_fashion_photoshoot_mtq8.svg" class="languages__picture">
+                    <img src="assets/undraw_photograph_re_up3b.svg" class="languages__picture">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container container" id="contact">
+            <div class="footer__texts">
+                <h2 class="title">Contactanos</h2>
+
+                <div class="footer__icons">
+                    <a href="https://www.facebook.com/?locale=es_LA" class="footer__icon fab " target="_blank"><img src="assets/facebook.svg" alt="fa-facebook-f" width="50px" height="60px"></a>
+                    <a href="https://www.instagram.com/?locale=es_LA" class="footer__icon fab " target="_blank"><img src="assets/instagram-icon.svg" alt="tweete" width="50px" height="60px"></a>
+                    <a href="https://web.whatsapp.com" class="footer__icon fab " target="_blank"><img src="assets/whatsapp-icon.svg" alt="insta" width="50px" height="60px"></a>
+                </div>
+                
+                <nav class="footer__nav">
+                  
+                   <div class="footer_social">
+                    <h2>Información</h2>
+                    <ul>
+                        <p>Calle 300 enttre 30y línea No. 30215</p>
+                        <li><a href="mailto:Lentelibre@gmail.com">Lentelibre@gmail.com</a></li>
+                        <li>Whatsapp:+5353694749</li>
+                        <li>Redes Sociales: @LenteLibre</li>
+                    </ul>
+                   </div>
+                </nav>
+
+                <span class="footer__copy">Derechos reservados 2023 &copy; LenteLibre</span>
+            </div>
+
+            <figure class="footer__img">
+                <img src="assets/contactus.svg" class="footer__picture">
+            </figure>
+        </div>
+    </footer>
+
+    
+
+    <script src="js/app.js"></script> 
+</body>
+</html>

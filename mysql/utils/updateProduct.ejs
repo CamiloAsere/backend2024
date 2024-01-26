@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar producto</title>
+  <link rel="stylesheet" href="/css/products.css">
+</head>
+<body class="container">
+  <form class="form" action="/admin/updateProduct/<%= product.id %>" method="POST">
+    <input class="input" type="text" name="name" placeholder="Nombre del producto" value="<%= product.name %>" required>
+    <input class="input" type="number" name="price" placeholder="Precio del producto" value="<%= product.price %>" required>
+    <button class="button" type="submit">Actualizar producto</button>
+  </form>
+</body>
+</html>

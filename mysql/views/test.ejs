@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/cards.css">
+  <link rel="stylesheet" href="/css/products.css">
+  <link rel="stylesheet" href="/css/button3.css">
+  <title>Products</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <div style="width: fit-content;">
+          <span style="--n:2">P</span>
+          <span style="--n:3">r</span>
+          <span style="--n:4">o</span>
+          <span style="--n:5">d</span>
+          <span style="--n:6">u</span>
+          <span style="--n:7">c</span>
+          <span style="--n:8">t</span>
+          <span style="--n:8">o</span>
+          <span style="--n:9">s</span>
+          </div>
+        <li><a color="white" href="/admin/reservations">Reservaciones</a></li>
+        <li><a href="/admin">Productos</a></li>
+        <div id="error-message" ></div>
+        <!-- Si el usuario está autenticado, mostrar el botón de logout -->
+        <!-- No creo q sea necesario tener la variable user ,se puede usar token tambien-->
+  <% if (user) { %>
+    <form action="/logout" method="POST">
+      <button  class="button3 button-logout" >Logout</button>
+    </form>
+  <!-- Si no, mostrar el botón de login -->
+  <% } else { %>
+    <a href="/login">
+      <button class="button3 button-login" type="submit" type="submit">Login</button>
+    </a>
+  <% } %>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="card-container">
+      <!-- Aquí irán las tarjetas dinámicamente -->
+     <% if(products.length === 0) { %>
+        <div id="loading" class="card">
+          <p>Cargando...</p>
+          <!-- Aquí puedes agregar tu animación de carga -->
+        </div>
+      <% } else { %>
+       
+          <% products.forEach(product => { %>
+          
+            <div class="card caja2">
+              <strong>Nombre:</strong> <%= product.name %> </br> 
+              <strong>Precio :</strong> <%= product.price %>  </br>
+              <strong>Disponibles:</strong> <%= product.quantity %> </br>
+              <label for="datareserva">Fecha de Reserva:</label> </br>
+              <input type="date" class="reserve-date" name="reserve-date" required/>
+              <details title="details">
+              <strong>description:</strong> <%= product.description %>
+              </details>
+              <br/>
+              <button class="reserve-button" data-product-id="<%= product.id %>" <%= product.quantity === 0 ? 'disabled' : '' %>>
+                Reservar
+              </button>
+            
+            </div>
+          <% }); %>
+          
+       
+      <% } %>
+      
+     
+      
+    </div>
+  </main>
+  <script  src="/js/animation.js"></script> 
+  <script type="module" src="/js/reserveProduct.js"></script> 
+  <script>
+    // Al hacer clic en un botón de reserva, obtén la fecha y hora local del usuario y realiza la reserva
+    document.querySelectorAll('.reserve-button').forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const productId = e.target.dataset.productId;
+        const dateInputs = document.querySelectorAll('.reserve-date');
+        const dateInput = dateInputs[index];
+        const selectedDate = new Date(dateInput.value); // Obtener la fecha seleccionada por el usuario
+        const offset = selectedDate.getTimezoneOffset(); // Obtener el desfase horario en minutos
+        const userLocalDate = new Date(selectedDate.getTime() + (offset * 60 * 1000)); // Ajustar la fecha a la zona horaria local
+        const isoDateString = userLocalDate.toISOString().split('T')[0]; // Obtener la fecha en formato ISO
+        // Comprueba si el usuario ha introducido una fecha
+        if (!isoDateString) {
+        alert('Por favor, introduce una fecha');
+         return;
+        }
+        // Llama a la función de reserva con el ID del producto y la fecha ajustada
+        reserveProduct(productId, isoDateString);
+      });
+    });
+    
+    </script>
+</body>
+</html>

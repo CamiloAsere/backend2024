@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+<!-- --> 
+.menu-container{
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+   padding-bottom: 16em;
+}
+
+.menu {
+    line-height: 70px;
+    position: relative;
+    margin: auto;
+    text-align: right; /* Agregado para mover el botón al lado derecho */
+    
+}
+.menu a{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    padding: 26px 15px;
+    line-height: normal;
+    transition: all 300ms ease;
+}
+.menu a:hover{
+    background: #1389e0;
+}
+.desplegar{
+    background: none;
+    border:none;
+    padding: 16px 10px;
+    cursor: pointer;
+    outline: 0px;
+}
+.desplegar:hover{
+    background: linear-gradient(#00c6ff, #0072ff); 
+    /* background: #1389e0; */
+}
+.desplegar span{
+    color: #0a0a0a;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.megaMenu{
+    
+    width: auto;/* 100% */
+    position: absolute;
+    background: #fff;
+    top: 90px; 
+    right: 0;/* Cambiado de 'left: 0;' a 'right: 0;'  para q el menu
+    aparezca del lado derecho de la pantalla.Luego en la clase menu hay q cambiarla tambien */
+    max-width: 550px;   
+    cursor: default;
+    transition: all 300ms ease-out;
+    
+    opacity: 0;
+    visibility: hidden;
+}
+
+.desplegar:hover .megaMenu{
+    opacity: 1;
+    visibility: visible;
+    top: 60px;
+    z-index: 1000;
+}
+.menu-header{
+    padding: 10px;
+   
+    background: linear-gradient(#00c6ff, #0072ff); 
+   
+}
+.categorias{
+    display: block;
+}
+
+.categorias a{
+    display: block;
+    color:#434343;
+    padding: 1px 1px;
+    font-size: 15px;
+}
+.categorias a:hover{
+   background: none; 
+   color: #1389e0; 
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

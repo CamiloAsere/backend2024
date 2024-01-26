@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+.register-container {
+    width: 20rem;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.register-container h2 {
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+.register-container form .input-group {
+    margin-bottom: 10px;
+}
+.register-container form .input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.register-container form .input-group input,
+.register-container form .input-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.register-container form .input-group input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+.register-container form .input-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,45 @@
+/* Estilos generales */
+
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }  
+header { background-color: #333; color: #fff; padding: 10px; }
+nav ul { list-style: none; padding: 0; display: flex; justify-content: space-around; }
+
+/* Estilos de las tarjetas de productos */        
+.card-container { display: flex; flex-wrap: wrap; justify-content: space-around; min-width: 20vh;}
+.card { border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin: 10px; width: 200px; }
+.card button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    }
+/* Estilos responsivos */                       
+@media (max-width: 768px) { .card { width: 45%; } }
+@media (max-width: 480px) { .card { width: 100%; } }
+.caja1{
+    border: 7px solid #000;
+    border-radius: 20px;
+ }
+ .caja2{
+    border: 7px dotted #000;
+    border-radius: 0 10px 30px 50px;
+ }
+ .caja3{
+    border: 7px dashed #000;
+    border-radius: 0 10px 0 10px;
+ }
+ .caja4{
+    border: 7px double #000;
+    border-radius: 100%;
+ }
+ .cajax{
+    border: 7px dotted #000;
+    border-radius: 100%;
+    transition: all 3s ease;
+ }
+ .cajax:hover {
+    transform:rotate(180deg);
+}
+
